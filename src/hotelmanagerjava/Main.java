@@ -6,9 +6,10 @@ public class Main
 {
     public static void main(String args[]) throws ParseException
     {
-        FileManager test = new FileManager();
-        test.readFile();
-        test.printArr();
+        //FileManager test = new FileManager();
+        //test.readFile();
+     //   test.printArr();
+        Menu.runMain();
         
     }
 }

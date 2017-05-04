@@ -54,15 +54,15 @@ public class FileManager
         
     }
     
-//    public void printArr()
-//    {
-//        for(Hotel x : hotelList)
-//        {
-//            //System.out.println(x.getName());
-//            for(Reservation y : x.reservations)
-//            {
-//                System.out.println(y.getName());
-//            }
-//        }
-//    }
+    public void printArr()
+    {
+        for(Hotel x : hotelList)
+        {
+            //System.out.println(x.getName());
+            for(Reservation y : x.reservations)
+            {
+                System.out.println(y.getName());
+            }
+        }
+    }
 }
