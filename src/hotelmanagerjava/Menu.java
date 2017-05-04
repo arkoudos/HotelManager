@@ -25,22 +25,22 @@ public class Menu extends JPanel
     protected JButton b1, b2, b3;
 
     public Menu() {
-        ImageIcon leftButtonIcon = createImageIcon("images/right.gif");
-        ImageIcon middleButtonIcon = createImageIcon("images/middle.gif");
-        ImageIcon rightButtonIcon = createImageIcon("images/left.gif");
+        //ImageIcon leftButtonIcon = createImageIcon("images/right.gif");
+        //ImageIcon middleButtonIcon = createImageIcon("images/middle.gif");
+       // ImageIcon rightButtonIcon = createImageIcon("images/left.gif");
 
-        b1 = new JButton("Disable middle button", leftButtonIcon);
+        b1 = new JButton("Disable middle button");
         b1.setVerticalTextPosition(AbstractButton.CENTER);
         b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
         b1.setMnemonic(KeyEvent.VK_D);
         b1.setActionCommand("disable");
 
-        b2 = new JButton("Middle button", middleButtonIcon);
+        b2 = new JButton("Middle button");
         b2.setVerticalTextPosition(AbstractButton.BOTTOM);
         b2.setHorizontalTextPosition(AbstractButton.CENTER);
         b2.setMnemonic(KeyEvent.VK_M);
 
-        b3 = new JButton("Enable middle button", rightButtonIcon);
+        b3 = new JButton("Enable middle button");
         //Use the default text position of CENTER, TRAILING (RIGHT).
         b3.setMnemonic(KeyEvent.VK_E);
         b3.setActionCommand("enable");

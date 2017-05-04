@@ -9,7 +9,7 @@ public class Main
         //FileManager test = new FileManager();
         //test.readFile();
      //   test.printArr();
-        Menu.runMain();
-        
+        //Menu.runMain();
+        MainMenu.CreateMenu();
     }
 }

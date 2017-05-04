@@ -8,13 +8,13 @@ import java.util.*;
 public class FileManager
 {
     ArrayList<Hotel>hotelList=new ArrayList<Hotel>();
-    
+    int numberOfHotels;
     public void readFile() throws ParseException
     {
         
         try
         {
-            int numberOfHotels;
+            
             String lineReader;
             String[] lineR;
             FileReader readFile = new FileReader("C:\\Users\\Mike\\Documents\\NetBeansProjects\\HotelManagerJava\\src\\hotelmanagerjava\\Data.csv");
@@ -24,7 +24,7 @@ public class FileManager
             lineReader = br.readLine();
             lineR= lineReader.split(";");
             numberOfHotels = Integer.parseInt(lineR[0]);
-            System.out.println("Number Of Registers: " + numberOfHotels);
+            //System.out.println("Number Of Registers: " + numberOfHotels);
             
             for(int i=0;i<numberOfHotels;i++)
             {
@@ -54,6 +54,11 @@ public class FileManager
         
     }
     
+    public int getNumberOfHotels() {
+        return numberOfHotels;
+    }
+    
+
     public void printArr()
     {
         for(Hotel x : hotelList)
@@ -61,7 +66,8 @@ public class FileManager
             //System.out.println(x.getName());
             for(Reservation y : x.reservations)
             {
-                System.out.println(y.getName());
+                //System.out.println(y.getName());
+                MainMenu.list1.add(y.getName());
             }
         }
     }
