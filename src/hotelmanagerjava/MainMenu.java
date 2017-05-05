@@ -129,7 +129,7 @@ public class MainMenu extends javax.swing.JFrame {
         try {
             test2.readFile();
             label1.setText(Integer.toString(test2.getNumberOfHotels()));
-            test2.printArr();
+            //test2.printArr();
         } catch (ParseException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
