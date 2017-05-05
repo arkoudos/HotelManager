@@ -9,6 +9,7 @@ public class FileManager
 {
     ArrayList<Hotel>hotelList=new ArrayList<Hotel>();
     int numberOfHotels;
+    
     public void readFile() throws ParseException
     {
         
@@ -17,7 +18,8 @@ public class FileManager
             
             String lineReader;
             String[] lineR;
-            FileReader readFile = new FileReader("C:\\Users\\Mike\\Documents\\NetBeansProjects\\HotelManagerJava\\src\\hotelmanagerjava\\Data.csv");
+            //FileReader readFile = new FileReader("C:\\Users\\Mike\\Documents\\NetBeansProjects\\HotelManagerJava\\src\\hotelmanagerjava\\Data.csv");
+            FileReader readFile = new FileReader(Main.filePath);
             BufferedReader br = new BufferedReader(readFile);
             
             //read the first line
