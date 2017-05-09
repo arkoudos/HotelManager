@@ -17,39 +17,24 @@ public class Main
         
         
         
-        File searchFile = new File("data2.csv");
+        File searchFile = new File("data.csv");
         
         if(searchFile.exists() && !searchFile.isDirectory())
         {
            JOptionPane.showConfirmDialog(null, "Loading File!", "File founded.", JOptionPane.DEFAULT_OPTION);
            filePath = searchFile;
         }else{
+            JOptionPane.showConfirmDialog(null, "Please choose the file for load.", "File not founded.", JOptionPane.WARNING_MESSAGE);
             JFileChooser fs = new JFileChooser();
             File f = new File(userDirLocation);
             fs.setCurrentDirectory(f);
             fs.showOpenDialog(null);
             filePath = fs.getSelectedFile();// userDirLocation;
-         //  filePath = JOptionPane.showInternalInputDialog(null, "Enter the name of the file:", "File not found!",JOptionPane.OPTIONS_PROPERTY );
-          // filePath = JOptionPane.showInputDialog(null,"Enter the name of the file:", "File not found!", JOptionPane.QUESTION_MESSAGE);
+            JOptionPane.showConfirmDialog(null, "Loading File!", "File founded.", JOptionPane.DEFAULT_OPTION);
         }
-//        final JFileChooser fc = new JFileChooser();
-//        
-//        String filePath = null;
-//        
-//        File searchFile = new File("data2.csv");
-//        if(searchFile.exists() && !searchFile.isDirectory())
-//        {
-//            filePath = "data.csv";
-//        }else{
-//            filePath = JOptionPane.showInternalInputDialog(null, "Enter the name of the file:", "File not found!",JOptionPane.OPTIONS_PROPERTY );
-//            //filePath = JOptionPane.showInputDialog(null,"Enter the name of the file:", "File not found!", JOptionPane.QUESTION_MESSAGE);
-//        }
-        
-        System.out.println(filePath);
-        //FileManager test = new FileManager();
-        //test.readFile();
-     //   test.printArr();
-        //Menu.runMain();
-       MainMenu.CreateMenu();
+        FileManager.readFile();
+        //MainMenu.label1.setText(Integer.toString(FileManager.getNumberOfHotels()));
+        MainMenu.CreateMenu();
+        System.out.println("STOP");
     }
 }

@@ -7,10 +7,10 @@ import java.util.*;
 
 public class FileManager
 {
-    ArrayList<Hotel>hotelList=new ArrayList<Hotel>();
-    int numberOfHotels;
+    static ArrayList<Hotel>hotelList=new ArrayList<Hotel>();
+    static int numberOfHotels;
     
-    public void readFile() throws ParseException
+    public static ArrayList<Hotel> readFile() throws ParseException
     {
         
         try
@@ -53,13 +53,16 @@ public class FileManager
         {
             
         }
-        
+        return hotelList;
     }
     
-    public int getNumberOfHotels() {
+    public static int getNumberOfHotels() {
         return numberOfHotels;
     }
     
+public static void clear(){
+	   hotelList.clear();
+}
 
     public void printArr()
     {

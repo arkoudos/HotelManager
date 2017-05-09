@@ -20,6 +20,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+       // label1.setText(Integer.toString(FileManager.getNumberOfHotels()));
     }
 
     /**
@@ -125,13 +126,12 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        FileManager test2 = new FileManager();
+
         try {
-            test2.readFile();
-            label1.setText(Integer.toString(test2.getNumberOfHotels()));
-            //test2.printArr();
+            FileManager.clear ();
+            FileManager.readFile();
         } catch (ParseException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
