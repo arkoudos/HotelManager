@@ -84,10 +84,11 @@ public class FileManager
                 {
                     saveFile.append(b.getName());
                     saveFile.append(';');
-                    saveFile.append(new Integer(b.getStayDurationDays()).toString());
-                    saveFile.append(';');
                     saveFile.append(new SimpleDateFormat("dd/MM/yyyy").format(b.getCheckinDate()));
                     saveFile.append(';');
+                    saveFile.append(new Integer(b.getStayDurationDays()).toString());
+                    saveFile.append(';');
+                    
                 }
             }
             saveFile.flush();
