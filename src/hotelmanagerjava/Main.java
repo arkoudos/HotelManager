@@ -17,20 +17,20 @@ public class Main
         
         
         
-        File searchFile = new File("data.csv");
+        File searchFile = new File("dat2a.csv");
         
         if(searchFile.exists() && !searchFile.isDirectory())
         {
            JOptionPane.showConfirmDialog(null, "Loading File!", "File founded.", JOptionPane.DEFAULT_OPTION);
            filePath = searchFile;
         }else{
-            JOptionPane.showConfirmDialog(null, "Please choose the file for load.", "File not founded.", JOptionPane.WARNING_MESSAGE);
+            //JOptionPane.showConfirmDialog(null, "Please choose the file for load.", "File not founded.", JOptionPane.WARNING_MESSAGE);
             JFileChooser fs = new JFileChooser();
             File f = new File(userDirLocation);
             fs.setCurrentDirectory(f);
             fs.showOpenDialog(null);
             filePath = fs.getSelectedFile();// userDirLocation;
-            JOptionPane.showConfirmDialog(null, "Loading File!", "File founded.", JOptionPane.DEFAULT_OPTION);
+            //JOptionPane.showConfirmDialog(null, "Loading File!", "File founded.", JOptionPane.DEFAULT_OPTION);
         }
         FileManager.readFile();
         //MainMenu.label1.setText(Integer.toString(FileManager.getNumberOfHotels()));

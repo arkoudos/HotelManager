@@ -56,13 +56,57 @@ public class FileManager
         return hotelList;
     }
     
+    public static void FileSave()
+    {
+        //sorting the array
+        FileSorter sort = new FileSorter();
+        sort.sortList(FileManager.hotelList,sort);
+        
+        try
+        {
+            FileWriter saveFile = new FileWriter(Main.filePath);
+            //Set the first line for the number of Hotels
+            saveFile.append(new Integer(hotelList.size()).toString());
+            //Writting line by line from the second line
+            for(Hotel a : hotelList)
+            {
+                saveFile.append('\n');
+                saveFile.append(new Integer(a.getId()).toString());
+                saveFile.append(';');
+                saveFile.append(a.getName());
+                saveFile.append(';');
+                saveFile.append(new Integer(a.getStars()).toString());
+                saveFile.append(';');
+                saveFile.append(new Integer(a.getNumberOfRooms()).toString());
+                saveFile.append(';');
+                
+                for(Reservation b : a.reservations)
+                {
+                    saveFile.append(b.getName());
+                    saveFile.append(';');
+                    saveFile.append(new Integer(b.getStayDurationDays()).toString());
+                    saveFile.append(';');
+                    saveFile.append(new SimpleDateFormat("dd/MM/yyyy").format(b.getCheckinDate()));
+                    saveFile.append(';');
+                }
+            }
+            saveFile.flush();
+            saveFile.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
     public static int getNumberOfHotels() {
         return numberOfHotels;
     }
     
-public static void clear(){
-	   hotelList.clear();
-}
+    public static void clear()
+    {
+        hotelList.clear();
+    }
 
     public void printArr()
     {
