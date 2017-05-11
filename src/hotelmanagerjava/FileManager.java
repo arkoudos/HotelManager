@@ -10,7 +10,9 @@ public class FileManager
     static ArrayList<Hotel>hotelList=new ArrayList<Hotel>();
     static int numberOfHotels;
     
-    public static ArrayList<Hotel> readFile() throws ParseException
+    //read file fuction
+    
+    public static ArrayList<Hotel> readFile()
     {
         
         try
@@ -52,9 +54,14 @@ public class FileManager
         }catch(IOException ioe)
         {
             
+        }catch(ParseException pe)
+        {
+            
         }
         return hotelList;
     }
+    
+    //Save to file fuction
     
     public static void FileSave()
     {

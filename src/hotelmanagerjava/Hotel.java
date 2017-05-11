@@ -1,5 +1,6 @@
 package hotelmanagerjava;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Hotel
 {
@@ -49,5 +50,10 @@ public class Hotel
 
     public void setReservations(ArrayList<Reservation> reservations) {
         this.reservations = reservations;
+    }
+    
+    public void addHotel()
+    {
+        
     }
 }

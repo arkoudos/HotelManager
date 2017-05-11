@@ -63,11 +63,7 @@ public class Menu extends JPanel
     public void actionPerformed(ActionEvent e) {
         if ("disable".equals(e.getActionCommand())) {
             FileManager test2 = new FileManager();
-            try {
-                test2.readFile();
-            } catch (ParseException ex) {
-                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            test2.readFile();
             test2.printArr();
 //            b2.setEnabled(false);
 //            b1.setEnabled(false);
