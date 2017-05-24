@@ -1,4 +1,7 @@
 package hotelmanagerjava;
+import java.awt.HeadlessException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
 
@@ -52,8 +55,38 @@ public class Hotel
         this.reservations = reservations;
     }
     
-    public void addHotel()
+    public static void addHotel()
     {
+        Hotel newHotel = new Hotel();
+        newHotel.setId(Integer.parseInt(JOptionPane.showInputDialog(null,"Hotel ID:","Hotel ID",JOptionPane.QUESTION_MESSAGE)));
+        newHotel.setName(JOptionPane.showInputDialog(null,"Hotel name:","Hotel Name.",JOptionPane.QUESTION_MESSAGE));
+        newHotel.setNumberOfRooms(Integer.parseInt(JOptionPane.showInputDialog(null, "How many rooms?", "Hotel Rooms",JOptionPane.QUESTION_MESSAGE)));
+        newHotel.setStars(Integer.parseInt(JOptionPane.showInputDialog(null, "Hotel stars:", "Hotel Stars",JOptionPane.QUESTION_MESSAGE)));
+        FileManager.hotelList.add(newHotel);
         
+        while(JOptionPane.YES_OPTION== JOptionPane.showConfirmDialog(null, "Do you want to add a reservation?","Reservation",JOptionPane.YES_NO_OPTION))
+        {
+            Reservation newRes = new Reservation();
+        
+        newRes.setName(JOptionPane.showInputDialog(null, "Name of reservation:","Reservation Name", JOptionPane.QUESTION_MESSAGE));
+        
+        Date date;
+        
+        try
+        {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(JOptionPane.showInputDialog(null, "Date of reservation(dd/MM/yyyy):","Reservation Date",JOptionPane.QUESTION_MESSAGE));
+            newRes.setCheckinDate(date);
+        }catch(HeadlessException  e)
+        {
+            e.printStackTrace();
+        }catch(ParseException e)
+        {
+            //myGraphics.jTextArea.append("Wrong Date Format");
+        }
+        
+        newRes.setStayDurationDays(Integer.parseInt(JOptionPane.showInputDialog(null, "Days for the reservation:", "Reservation Days", JOptionPane.QUESTION_MESSAGE)));
+        
+        newHotel.reservations.add(newRes);
+        }
     }
 }

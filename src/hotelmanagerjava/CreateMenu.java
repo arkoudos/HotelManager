@@ -6,35 +6,47 @@ import java.awt.*;
 
 public class CreateMenu extends JFrame implements ActionListener
 {
-    JButton load = new JButton("Load");
-    JButton save = new JButton("Save");
-    JButton add = new JButton("Add");
-    JButton test = new JButton("Test");
+    JButton load = new JButton("Load Hotels and Reservations from file");
+    JButton save = new JButton("Save Hotels and Reservations to file");
+    JButton add = new JButton("Add a Hotel(With reservations)");
+    JButton search = new JButton("Search and Display a Hotel by ID");
+    JButton display = new JButton("Display Reservations by surname search");
+    JButton exit = new JButton("Exit");
+    
+    //JFrame addButtonF = new JFrame("Add Hotel");
+        
+    
     
     public CreateMenu()
     {
         super("Hotel Manager");
-        setSize(140,170);
+        setSize(325,225);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
         load.addActionListener(this);
         save.addActionListener(this);
+        add.addActionListener(this);
+        search.addActionListener(this);
+        display.addActionListener(this);
+        exit.addActionListener(this);
         JPanel pane = new JPanel();
         pane.add(load);
         pane.add(save);
         pane.add(add);
+        pane.add(search);
+        pane.add(display);
+        pane.add(exit);
         add(pane);
-        pack();
+        //pack();
         setVisible(true);
+        
+       // addButtonF.setSize(500,500);
+        //addButtonF.add(test);
+        //addButton();
     }
     
-    public void addButton()
-    {
-        JFrame addButtonF = new JFrame("Add Hotel");
-        addButtonF.setSize(500,500);
-        addButtonF.add(test);
-        addButtonF.setVisible(true);
-    }
     
+    @Override
     public void actionPerformed(ActionEvent evt)
     {
         Object source = evt.getSource();
@@ -47,11 +59,18 @@ public class CreateMenu extends JFrame implements ActionListener
              FileManager.FileSave();
         }else if (source == add)
         {
-            //addButton();
-            JFrame addButtonF = new JFrame("Add Hotel");
-        addButtonF.setSize(500,500);
-        addButtonF.add(test);
-        addButtonF.setVisible(true);
+            
+            Hotel.addHotel();
+        }else if(source == search)
+        {
+            
+        }else if(source == display)
+        {
+            
+        }else if(source == exit)
+        {
+            FileManager.FileSave();
+            System.exit(0);
         }
         repaint();
     }
