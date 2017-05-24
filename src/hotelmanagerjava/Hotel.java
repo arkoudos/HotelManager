@@ -81,12 +81,13 @@ public class Hotel
             e.printStackTrace();
         }catch(ParseException e)
         {
-            //myGraphics.jTextArea.append("Wrong Date Format");
+            CreateMenu.output.append("Wrong Date Format.\n");
         }
         
         newRes.setStayDurationDays(Integer.parseInt(JOptionPane.showInputDialog(null, "Days for the reservation:", "Reservation Days", JOptionPane.QUESTION_MESSAGE)));
         
         newHotel.reservations.add(newRes);
         }
+        CreateMenu.output.append("Hotel have been successfully added.\n");
     }
 }

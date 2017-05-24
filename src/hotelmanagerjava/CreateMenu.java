@@ -3,6 +3,7 @@ package hotelmanagerjava;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
 
 public class CreateMenu extends JFrame implements ActionListener
 {
@@ -13,16 +14,15 @@ public class CreateMenu extends JFrame implements ActionListener
     JButton display = new JButton("Display Reservations by surname search");
     JButton exit = new JButton("Exit");
     
-    //JFrame addButtonF = new JFrame("Add Hotel");
-        
     
+    public static JTextArea output = new JTextArea(5,20);
+    JScrollPane ops = new JScrollPane(output);
     
     public CreateMenu()
     {
         super("Hotel Manager");
-        setSize(325,225);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        //setSize(500,500);
+        //setResizable(false);
         load.addActionListener(this);
         save.addActionListener(this);
         add.addActionListener(this);
@@ -30,19 +30,21 @@ public class CreateMenu extends JFrame implements ActionListener
         display.addActionListener(this);
         exit.addActionListener(this);
         JPanel pane = new JPanel();
+        pane.setLayout(new GridLayout(4,4));
+        //pane.setSize(500,500);
         pane.add(load);
         pane.add(save);
         pane.add(add);
         pane.add(search);
         pane.add(display);
         pane.add(exit);
+        pane.add(ops,BorderLayout.NORTH);
+        setSize(650,650);
+        setUndecorated(false);
         add(pane);
-        //pack();
-        setVisible(true);
         
-       // addButtonF.setSize(500,500);
-        //addButtonF.add(test);
-        //addButton();
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     
@@ -59,7 +61,6 @@ public class CreateMenu extends JFrame implements ActionListener
              FileManager.FileSave();
         }else if (source == add)
         {
-            
             Hotel.addHotel();
         }else if(source == search)
         {

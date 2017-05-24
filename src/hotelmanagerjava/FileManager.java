@@ -28,8 +28,9 @@ public class FileManager
             lineReader = br.readLine();
             lineR= lineReader.split(";");
             numberOfHotels = Integer.parseInt(lineR[0]);
+            CreateMenu.output.append("Reading the number of hotels that are listed.\n");
             //System.out.println("Number Of Registers: " + numberOfHotels);
-            
+            CreateMenu.output.append("Loading File...\n");
             for(int i=0;i<numberOfHotels;i++)
             {
                 lineReader = br.readLine();
@@ -51,13 +52,11 @@ public class FileManager
                     temp.getReservations().add(tempRes);
                 }
             }
-        }catch(IOException ioe)
+        }catch(IOException | ParseException ioe)
         {
-            
-        }catch(ParseException pe)
-        {
-            
+            CreateMenu.output.append(ioe + "\n");
         }
+        CreateMenu.output.append("Hotels have been loaded to memmory. \n");
         return hotelList;
     }
     
@@ -68,7 +67,7 @@ public class FileManager
         //sorting the array
         FileSorter sort = new FileSorter();
         sort.sortList(FileManager.hotelList,sort);
-        
+        CreateMenu.output.append("Saving data to file...\n");
         try
         {
             FileWriter saveFile = new FileWriter(Main.filePath);
@@ -105,6 +104,7 @@ public class FileManager
         {
             e.printStackTrace();
         }
+        CreateMenu.output.append("Data successful saved.\n");
     }
     
     public static int getNumberOfHotels() {
@@ -114,9 +114,10 @@ public class FileManager
     public static void clear()
     {
         hotelList.clear();
+        CreateMenu.output.append("Clearing memmory...\n");
     }
 
-    public void printArr()
+    public static void printArr()
     {
         for(Hotel x : hotelList)
         {
@@ -124,7 +125,8 @@ public class FileManager
             for(Reservation y : x.reservations)
             {
                 //System.out.println(y.getName());
-                MainMenu.list1.add(y.getName());
+                y.getName();
+                CreateMenu.output.append(y.getName()+ "\n");
             }
         }
     }
