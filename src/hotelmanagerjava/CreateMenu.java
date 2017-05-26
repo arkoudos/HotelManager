@@ -14,40 +14,58 @@ public class CreateMenu// extends JFrame implements ActionListener
     private ActionListener action;
     
     //Buttons & Utils
-    private JButton load,save,add,search,display,exit,linearSID,linearSSur;
+    private JButton LoadButton,SaveButton,AddButton,SearchButton,DisplayButton,ExitButton,LinearSIDButton,LinearSSurButton,BinarySearchButton,InterpolationSearchButton,AVLSearchButton;
     public static JTextArea output = new JTextArea(4,20);
     JScrollPane ops = new JScrollPane(output);
     
     
     public void DisplayMenu()
     {
+        //Creation of Main Menu
         MainMenu = new JFrame("Hotel Manager");
         MainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         MainMenu.setLocationByPlatform(true);
         
-        Panel MainPane = new Panel();
+        //Main Panel
+        JPanel MainPane = new JPanel();
         MainPane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
-        load = new JButton("Load Hotels and Reservations from file");
-        save = new JButton("Save Hotels and Reservations to file");
-        add = new JButton("Add a Hotel(With reservations)");
-        search = new JButton("Search and Display a Hotel by ID");
-        display = new JButton("Display Reservations by surname search");
-        exit = new JButton("Exit");
+        //Main Menu Buttons
+        LoadButton = new JButton("Load Hotels and Reservations from file");
+        SaveButton = new JButton("Save Hotels and Reservations to file");
+        AddButton = new JButton("Add a Hotel(With reservations)");
+        SearchButton = new JButton("Search and Display a Hotel by ID");
+        DisplayButton = new JButton("Display Reservations by surname search");
+        ExitButton = new JButton("Exit");
         
         
         //Search Menu by ID Items
         SearchMenuID = new JFrame("Search Menu by ID");
         SearchMenuID.setLocationByPlatform(true);
+        
                     
         JPanel SearchPaneID = new JPanel();
         
-        linearSID = new JButton("Linear Search");
+        //LinearS Button
+        LinearSIDButton = new JButton("Linear Search");
+        SearchPaneID.add(LinearSIDButton);
         
-        SearchPaneID.add(linearSID);
+        //BinaryS Button
+        BinarySearchButton = new JButton("Binary Search");
+        SearchPaneID.add(BinarySearchButton);
+        
+        //InterpolationS Button
+        InterpolationSearchButton = new JButton("Interpolation Search");
+        SearchPaneID.add(InterpolationSearchButton);
+        
+        //AVL Search
+        AVLSearchButton = new JButton("AVL Search");
+        SearchPaneID.add(AVLSearchButton);
+        
         SearchMenuID.getContentPane().add(SearchPaneID);
-        SearchMenuID.setSize(300,300);
+        SearchMenuID.setSize(300,115);
+        
         
         
         //Search Menu by Sur Items
@@ -55,82 +73,116 @@ public class CreateMenu// extends JFrame implements ActionListener
         SearchMenuSur.setLocationByPlatform(true);
         
         JPanel SearchPaneSur = new JPanel();
-        linearSSur = new JButton("Linear Search");
+        LinearSSurButton = new JButton("Linear Search");
                 
-        SearchPaneSur.add(linearSSur);
+        SearchPaneSur.add(LinearSSurButton);
         SearchMenuSur.getContentPane().add(SearchPaneSur);
         SearchMenuSur.setSize(300,300);
         
+        //Actions for the buttons
+        
         action = new ActionListener()
         {
+            @Override
             public void actionPerformed(ActionEvent ae)
             {
                 JButton button = (JButton) ae.getSource();
                 
-                if (button == load)
+                if (button == LoadButton)
                 {
                     FileManager.clear ();
                     FileManager.readFile();
-                }else if(button == save)
+                }
+                
+                else if(button == SaveButton)
                 {
                     FileManager.FileSave();
-                }else if(button == add)
+                }
+                
+                else if(button == AddButton)
                 {
                     Hotel.addHotel();
-                }else if(button == search)
+                }
+                
+                else if(button == SearchButton)
                 {
                     SearchMenuID.setVisible(true);
-                }else if(button == linearSID)
+                }
+                
+                else if(button == LinearSIDButton)
                 {
                     FileManager.SearchByID(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE)));
-                }else if(button == display)
+                }
+                
+                else if(button == BinarySearchButton)
+                {
+                    BinarySearch BS = new BinarySearch();
+                    output.append("The hotel you searched is " + FileManager.hotelList.get(BS.binarySearch((Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE))))).getName() + "\n");
+                }
+                
+                else if(button == InterpolationSearchButton)
+                {
+                    output.append("The hotel you searched is " + FileManager.hotelList.get(InterpolationSearch.interpolationSearch(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE)))).getName() + "\n");
+                }
+                
+                else if (button == AVLSearchButton)
+                {
+                    System.out.println("TESTT");
+                }
+                
+                else if(button == DisplayButton)
                 {
                     SearchMenuSur.setVisible(true);
-                }else if(button == linearSSur)
+                }
+                
+                else if(button == LinearSSurButton)
                 {
                     FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE));
                 }
             }
         };
         
-        load.addActionListener(action);
-        save.addActionListener(action);
-        add.addActionListener(action);
-        search.addActionListener(action);
-        linearSID.addActionListener(action);
-        display.addActionListener(action);
-        linearSSur.addActionListener(action);
-        exit.addActionListener(action);
+        LoadButton.addActionListener(action);
+        SaveButton.addActionListener(action);
+        AddButton.addActionListener(action);
+        SearchButton.addActionListener(action);
+        LinearSIDButton.addActionListener(action);
+        BinarySearchButton.addActionListener(action);
+        InterpolationSearchButton.addActionListener(action);
+        AVLSearchButton.addActionListener(action);
+        DisplayButton.addActionListener(action);
+        LinearSSurButton.addActionListener(action);
+        ExitButton.addActionListener(action);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
-        MainPane.add(load,c);
+        MainPane.add(LoadButton,c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 1;
-        MainPane.add(save,c);
+        MainPane.add(SaveButton,c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 2;
-        MainPane.add(add,c);
+        MainPane.add(AddButton,c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 3;
-        MainPane.add(search,c);
+        MainPane.add(SearchButton,c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 4;
-        MainPane.add(display,c);
+        MainPane.add(DisplayButton,c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 5;
-        MainPane.add(exit,c);
+        MainPane.add(ExitButton,c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
