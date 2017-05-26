@@ -1,10 +1,6 @@
 package hotelmanagerjava;
 
-import java.awt.HeadlessException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import javax.swing.JOptionPane;
 
 public class Reservation
 {

@@ -9,9 +9,10 @@ public class FileManager
 {
     static ArrayList<Hotel>hotelList=new ArrayList<Hotel>();
     static int numberOfHotels;
+    static AVLTrees avlTree = new AVLTrees();
+    static Trie tr = new Trie();
     
     //read file fuction
-    
     public static ArrayList<Hotel> readFile()
     {
         
@@ -68,22 +69,23 @@ public class FileManager
         FileSorter sort = new FileSorter();
         sort.sortList(FileManager.hotelList,sort);
         CreateMenu.output.append("Saving data to file...\n");
+        
         try
         {
             FileWriter saveFile = new FileWriter(Main.filePath);
             //Set the first line for the number of Hotels
-            saveFile.append(new Integer(hotelList.size()).toString());
+            saveFile.append(Integer.toString(hotelList.size()));
             //Writting line by line from the second line
             for(Hotel a : hotelList)
             {
                 saveFile.append('\n');
-                saveFile.append(new Integer(a.getId()).toString());
+                saveFile.append(Integer.toString(a.getId()));
                 saveFile.append(';');
                 saveFile.append(a.getName());
                 saveFile.append(';');
-                saveFile.append(new Integer(a.getStars()).toString());
+                saveFile.append(Integer.toString(a.getStars()));
                 saveFile.append(';');
-                saveFile.append(new Integer(a.getNumberOfRooms()).toString());
+                saveFile.append(Integer.toString(a.getNumberOfRooms()));
                 saveFile.append(';');
                 
                 for(Reservation b : a.reservations)
@@ -92,7 +94,7 @@ public class FileManager
                     saveFile.append(';');
                     saveFile.append(new SimpleDateFormat("dd/MM/yyyy").format(b.getCheckinDate()));
                     saveFile.append(';');
-                    saveFile.append(new Integer(b.getStayDurationDays()).toString());
+                    saveFile.append(Integer.toString(b.getStayDurationDays()));
                     saveFile.append(';');
                     
                 }
@@ -102,7 +104,6 @@ public class FileManager
         }
         catch (IOException e)
         {
-            e.printStackTrace();
         }
         CreateMenu.output.append("Data successful saved.\n");
     }
@@ -149,17 +150,29 @@ public class FileManager
 	   return searchSN;
 }
     
-    public static void printArr()
+   public static void TrieFill()
+   {
+       for(Hotel x : hotelList)
+       {
+           for(Reservation y:x.reservations)
+           {
+               tr.insert(y, x);
+           }
+       }
+   }
+    
+    public static void createAVLTrees()
     {
-        for(Hotel x : hotelList)
+        for(Hotel a : hotelList)
         {
-            //System.out.println(x.getName());
-            for(Reservation y : x.reservations)
-            {
-                //System.out.println(y.getName());
-                y.getName();
-                CreateMenu.output.append(y.getName()+ "\n");
-            }
+            avlTree.insert(a);
         }
+    }
+    
+    public static void SearchAVL(int searchID)
+    {
+        Hotel AVLSearch = new Hotel();
+        AVLSearch.setId(searchID);
+        CreateMenu.output.append("The hotel you searched is " + avlTree.search(AVLSearch.getId()).getName() + "\n");
     }
 }

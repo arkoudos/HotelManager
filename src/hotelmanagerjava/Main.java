@@ -1,5 +1,6 @@
 package hotelmanagerjava;
 
+import static hotelmanagerjava.FileManager.hotelList;
 import java.io.*;
 import java.text.ParseException;
 import javax.swing.JFileChooser;
@@ -11,12 +12,11 @@ import javax.swing.SwingUtilities;
 public class Main 
 {
     static File filePath = null;
-    
+     
     public static void main(String args[]) throws ParseException
     {
         String userDirLocation = System.getProperty("user.dir");
-        
-        
+       
         
         File searchFile = new File("data.csv");
         
@@ -37,7 +37,10 @@ public class Main
         }
         FileManager.readFile();
         
- 
+        FileManager.createAVLTrees();
+        
+        FileManager.TrieFill();
+        
         SwingUtilities.invokeLater(new Runnable()
         {
             @Override

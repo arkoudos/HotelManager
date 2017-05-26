@@ -3,7 +3,7 @@ package hotelmanagerjava;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
+import javax.swing.text.DefaultCaret;
 
 public class CreateMenu// extends JFrame implements ActionListener
 {
@@ -14,10 +14,11 @@ public class CreateMenu// extends JFrame implements ActionListener
     private ActionListener action;
     
     //Buttons & Utils
-    private JButton LoadButton,SaveButton,AddButton,SearchButton,DisplayButton,ExitButton,LinearSIDButton,LinearSSurButton,BinarySearchButton,InterpolationSearchButton,AVLSearchButton;
+    private JButton LoadButton,SaveButton,AddButton,SearchButton,DisplayButton,ExitButton,LinearSIDButton,LinearSSurButton,BinarySearchButton,InterpolationSearchButton,AVLSearchButton,TrieSearchButton;
     public static JTextArea output = new JTextArea(4,20);
     JScrollPane ops = new JScrollPane(output);
-    
+
+
     
     public void DisplayMenu()
     {
@@ -26,6 +27,8 @@ public class CreateMenu// extends JFrame implements ActionListener
         MainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         MainMenu.setLocationByPlatform(true);
         
+        
+
         //Main Panel
         JPanel MainPane = new JPanel();
         MainPane.setLayout(new GridBagLayout());
@@ -65,19 +68,23 @@ public class CreateMenu// extends JFrame implements ActionListener
         
         SearchMenuID.getContentPane().add(SearchPaneID);
         SearchMenuID.setSize(300,115);
-        
-        
-        
+               
         //Search Menu by Sur Items
         SearchMenuSur = new JFrame("Search Menu by Surname");
         SearchMenuSur.setLocationByPlatform(true);
         
         JPanel SearchPaneSur = new JPanel();
+        
+        //LinearS Button
         LinearSSurButton = new JButton("Linear Search");
-                
         SearchPaneSur.add(LinearSSurButton);
+                
+        //TrieS Button
+        TrieSearchButton = new JButton("TrieSearch");
+        SearchPaneSur.add(TrieSearchButton);
+        
         SearchMenuSur.getContentPane().add(SearchPaneSur);
-        SearchMenuSur.setSize(300,300);
+        SearchMenuSur.setSize(100,115);
         
         //Actions for the buttons
         
@@ -127,7 +134,7 @@ public class CreateMenu// extends JFrame implements ActionListener
                 
                 else if (button == AVLSearchButton)
                 {
-                    System.out.println("TESTT");
+                    FileManager.SearchAVL(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE)));
                 }
                 
                 else if(button == DisplayButton)
@@ -137,7 +144,18 @@ public class CreateMenu// extends JFrame implements ActionListener
                 
                 else if(button == LinearSSurButton)
                 {
-                    FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE));
+                    FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surname",JOptionPane.QUESTION_MESSAGE));
+                }
+                
+                else if(button == TrieSearchButton)
+                {
+                    System.out.println(FileManager.tr.search(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surnmae",JOptionPane.QUESTION_MESSAGE)));
+                }
+                
+                else if(button == ExitButton)
+                {
+                    FileManager.FileSave();
+                    System.exit(0);
                 }
             }
         };
@@ -152,6 +170,7 @@ public class CreateMenu// extends JFrame implements ActionListener
         AVLSearchButton.addActionListener(action);
         DisplayButton.addActionListener(action);
         LinearSSurButton.addActionListener(action);
+        TrieSearchButton.addActionListener(action);
         ExitButton.addActionListener(action);
         
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -192,6 +211,10 @@ public class CreateMenu// extends JFrame implements ActionListener
         c.ipadx = 500;
         MainPane.add(ops,c);
         
+        
+          //Making the Scroll bar auto-update
+        DefaultCaret caret = (DefaultCaret)output.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         
         MainMenu.setLayout(new GridLayout(1,1));
         MainMenu.setSize(500,500);
