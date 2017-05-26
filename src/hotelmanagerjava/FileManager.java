@@ -117,6 +117,38 @@ public class FileManager
         CreateMenu.output.append("Clearing memmory...\n");
     }
 
+    
+    public static Hotel SearchByID(int searchID)
+    {
+        Hotel searchHotel = new Hotel();
+        searchHotel.setId(searchID);
+        for(Hotel a : hotelList)
+        {
+            if(a.getId() == searchHotel.getId())
+            {
+                CreateMenu.output.append("The hotel you searched is " + a.getName()+"\n");
+                break;
+            }
+        }
+        return searchHotel;
+    }
+    
+    public static Reservation SearchBySur(String surname){
+	   Reservation searchSN=new Reservation();
+	   searchSN.setName(surname);
+	   for(Hotel x: hotelList){
+		   for(Reservation y: x.reservations){
+			   if(y.getName().equals(searchSN.getName())){
+				   CreateMenu.output.append(searchSN.getName()+" is staying at: "+ x.getName() + " Checkin Date: " + new SimpleDateFormat("dd/MM/yyyy").format(y.getCheckinDate())+" Staying for:"+y.getStayDurationDays()+" Days\n");
+				   //myGraphics.jTextArea.append(System.lineSeparator());
+				   break;
+			   }
+		   }
+			   
+	   }
+	   return searchSN;
+}
+    
     public static void printArr()
     {
         for(Hotel x : hotelList)
