@@ -14,8 +14,8 @@ public class CreateMenu// extends JFrame implements ActionListener
     private ActionListener action;
     
     //Buttons & Utils
-    private JButton LoadButton,SaveButton,AddButton,SearchButton,DisplayButton,ExitButton,LinearSIDButton,LinearSSurButton,BinarySearchButton,InterpolationSearchButton,AVLSearchButton,TrieSearchButton;
-    public static JTextArea output = new JTextArea(4,20);
+    private JButton LoadButton,SaveButton,AddButton,SearchButton,DisplayButton,ExitButton,LinearSIDButton,LinearSSurButton,BinarySearchButton,InterpolationSearchButton,AVLSearchButton,TrieSearchButton,IDSearchTimeButton,SurnameSearchTimeButton;
+    public static JTextArea output = new JTextArea(7,50);
     JScrollPane ops = new JScrollPane(output);
 
 
@@ -40,6 +40,8 @@ public class CreateMenu// extends JFrame implements ActionListener
         AddButton = new JButton("Add a Hotel(With reservations)");
         SearchButton = new JButton("Search and Display a Hotel by ID");
         DisplayButton = new JButton("Display Reservations by surname search");
+        IDSearchTimeButton = new JButton("ID Search Time");
+        SurnameSearchTimeButton = new JButton("Surname Search Time");
         ExitButton = new JButton("Exit");
         
         
@@ -152,6 +154,16 @@ public class CreateMenu// extends JFrame implements ActionListener
                     System.out.println(FileManager.tr.search(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surnmae",JOptionPane.QUESTION_MESSAGE)));
                 }
                 
+                else if(button == IDSearchTimeButton)
+                {
+                    SearchTime.IDSearchTime();
+                }
+                
+                else if(button == SurnameSearchTimeButton)
+                {
+                    SearchTime.SurnnameSearchTime();
+                }
+                
                 else if(button == ExitButton)
                 {
                     FileManager.FileSave();
@@ -171,6 +183,8 @@ public class CreateMenu// extends JFrame implements ActionListener
         DisplayButton.addActionListener(action);
         LinearSSurButton.addActionListener(action);
         TrieSearchButton.addActionListener(action);
+        IDSearchTimeButton.addActionListener(action);
+        SurnameSearchTimeButton.addActionListener(action);
         ExitButton.addActionListener(action);
         
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -201,6 +215,16 @@ public class CreateMenu// extends JFrame implements ActionListener
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 5;
+        MainPane.add(IDSearchTimeButton,c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 6;
+        MainPane.add(SurnameSearchTimeButton,c);
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 7;
         MainPane.add(ExitButton,c);
         
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -217,7 +241,7 @@ public class CreateMenu// extends JFrame implements ActionListener
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         
         MainMenu.setLayout(new GridLayout(1,1));
-        MainMenu.setSize(500,500);
+        MainMenu.setSize(600,600);
         MainMenu.setUndecorated(false);
         MainMenu.getContentPane().add(MainPane);
         MainMenu.pack();

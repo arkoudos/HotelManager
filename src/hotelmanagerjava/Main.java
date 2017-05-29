@@ -18,23 +18,21 @@ public class Main
         String userDirLocation = System.getProperty("user.dir");
        
         
-        File searchFile = new File("data4.csv");
+        File searchFile = new File("data.csv");
         
         if(searchFile.exists() && !searchFile.isDirectory())
         {
-           //JOptionPane.showConfirmDialog(null, "Loading File!", "File founded.", JOptionPane.DEFAULT_OPTION);
             CreateMenu.output.append("File have been founded.\n Loading File...\n");
            filePath = searchFile;
         }else{
-            //JOptionPane.showConfirmDialog(null, "Please choose the file for load.", "File not founded.", JOptionPane.WARNING_MESSAGE);
-            JFileChooser fs = new JFileChooser();
+           JFileChooser fs = new JFileChooser();
             File f = new File(userDirLocation);
             fs.setCurrentDirectory(f);
             fs.showOpenDialog(null);
             filePath = fs.getSelectedFile();// userDirLocation;
             CreateMenu.output.append("File have been founded.\n Loading File...\n");
-            //JOptionPane.showConfirmDialog(null, "Loading File!", "File founded.", JOptionPane.DEFAULT_OPTION);
         }
+        
         FileManager.readFile();
         
         FileManager.createAVLTrees();

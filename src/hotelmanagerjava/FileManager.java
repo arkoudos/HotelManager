@@ -7,58 +7,79 @@ import java.util.*;
 
 public class FileManager
 {
-    static ArrayList<Hotel>hotelList=new ArrayList<Hotel>();
+    static ArrayList<Hotel>hotelList=new ArrayList<Hotel>();//Array List load with data from the file
     static int numberOfHotels;
-    static AVLTrees avlTree = new AVLTrees();
-    static Trie tr = new Trie();
+    static AVLTrees avlTree = new AVLTrees(); // AVL tree creation
+    static Trie tr = new Trie(); // Trie creation
     
     //read file fuction
     public static ArrayList<Hotel> readFile()
     {
-        
+        BufferedReader br = null;
         try
         {
+            if(!FileManager.hotelList.isEmpty())
+            {
+                hotelList.clear();//If th hotel list have data, delete them
+                CreateMenu.output.append("Data have been deleted.\n");
+            }
             
-            String lineReader;
-            String[] lineR;
-            //FileReader readFile = new FileReader("C:\\Users\\Mike\\Documents\\NetBeansProjects\\HotelManagerJava\\src\\hotelmanagerjava\\Data.csv");
-            FileReader readFile = new FileReader(Main.filePath);
-            BufferedReader br = new BufferedReader(readFile);
             
+            String lineReader; // Read Line
+            String[] lineR; // Store Readed Line
+            FileReader readFile = new FileReader(Main.filePath); // File reader
+            br = new BufferedReader(readFile); // Buffer
+ 
             //read the first line
             lineReader = br.readLine();
             lineR= lineReader.split(";");
-            numberOfHotels = Integer.parseInt(lineR[0]);
+            numberOfHotels = Integer.parseInt(lineR[0]); // save number of hotels listend
             CreateMenu.output.append("Reading the number of hotels that are listed.\n");
-            //System.out.println("Number Of Registers: " + numberOfHotels);
             CreateMenu.output.append("Loading File...\n");
+            
+            //Filling the ArrayList -> hotelList
             for(int i=0;i<numberOfHotels;i++)
             {
-                lineReader = br.readLine();
-                lineR = lineReader.split(";");
-                Hotel temp = new Hotel();
-                temp.setId(Integer.parseInt(lineR[0]));
-                temp.setName(lineR[1]);
-                temp.setStars(Integer.parseInt(lineR[2]));
-                temp.setNumberOfRooms(Integer.parseInt(lineR[3]));
-                hotelList.add(temp);
-                
+                lineReader = br.readLine();// read line by line
+                lineR = lineReader.split(";"); // Line splitter
+                Hotel readH = new Hotel(); //creating a temporary Hotel to fill array
+                //Starting to load the temporary list
+                readH.setId(Integer.parseInt(lineR[0]));
+                readH.setName(lineR[1]);
+                readH.setStars(Integer.parseInt(lineR[2]));
+                readH.setNumberOfRooms(Integer.parseInt(lineR[3]));
+                hotelList.add(readH);//Fill the temporary list
+                //Filling the Reservation List to the hotels
                 for(int j=4;j<lineR.length;j+=3)
                 {
-                    Reservation tempRes = new Reservation();
+                    Reservation tempRes = new Reservation(); //Temporary reservation as above
                     tempRes.setName(lineR[j]);
-                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse(lineR[j+1]);//to see the exception
+                    Date date = new SimpleDateFormat("dd/MM/yyyy").parse(lineR[j+1]);
                     tempRes.setCheckinDate(date);
                     tempRes.setStayDurationDays(Integer.parseInt(lineR[j+2]));
-                    temp.getReservations().add(tempRes);
+                    readH.getReservations().add(tempRes); // add the reservations to the temporary hotel
                 }
             }
+        }catch(FileNotFoundException fnf) // file not found exception call FileSave fuction to create a new one
+        {
+            CreateMenu.output.append("File not Found!\nCreating new....");
+            FileManager.FileSave();
         }catch(IOException | ParseException ioe)
         {
-            CreateMenu.output.append(ioe + "\n");
+            ioe.printStackTrace();
+        }
+        
+        try
+        {
+            FileSorter sort = new FileSorter();
+            sort.sortList(FileManager.hotelList, sort);
+            br.close();
+        }catch(IOException ioe)
+        {
+            CreateMenu.output.append("Error while closing the Buffer\n");
         }
         CreateMenu.output.append("Hotels have been loaded to memmory. \n");
-        return hotelList;
+        return hotelList; // return the hotel list loaded with the data
     }
     
     //Save to file fuction
@@ -72,7 +93,7 @@ public class FileManager
         
         try
         {
-            FileWriter saveFile = new FileWriter(Main.filePath);
+            FileWriter saveFile = new FileWriter(Main.filePath);//Creating the new file
             //Set the first line for the number of Hotels
             saveFile.append(Integer.toString(hotelList.size()));
             //Writting line by line from the second line
@@ -108,17 +129,19 @@ public class FileManager
         CreateMenu.output.append("Data successful saved.\n");
     }
     
-    public static int getNumberOfHotels() {
-        return numberOfHotels;
-    }
+//    public static int getNumberOfHotels() {
+//        return numberOfHotels;
+//    }
+//    
     
+    //clearing the hotel list fuction
     public static void clear()
     {
         hotelList.clear();
         CreateMenu.output.append("Clearing memmory...\n");
     }
 
-    
+    //Linear search fuction for ID
     public static Hotel SearchByID(int searchID)
     {
         Hotel searchHotel = new Hotel();
@@ -128,39 +151,46 @@ public class FileManager
             if(a.getId() == searchHotel.getId())
             {
                 CreateMenu.output.append("The hotel you searched is " + a.getName()+"\n");
-                break;
+                break;// stop when i get the id
             }
         }
         return searchHotel;
     }
     
+    //Linear search fuction for Surname
     public static Reservation SearchBySur(String surname){
+        int check=0;
 	   Reservation searchSN=new Reservation();
 	   searchSN.setName(surname);
 	   for(Hotel x: hotelList){
 		   for(Reservation y: x.reservations){
 			   if(y.getName().equals(searchSN.getName())){
 				   CreateMenu.output.append(searchSN.getName()+" is staying at: "+ x.getName() + " Checkin Date: " + new SimpleDateFormat("dd/MM/yyyy").format(y.getCheckinDate())+" Staying for:"+y.getStayDurationDays()+" Days\n");
-				   //myGraphics.jTextArea.append(System.lineSeparator());
+                                   check=1;
 				   break;
 			   }
 		   }
 			   
 	   }
+           if (check == 0)
+           {
+               CreateMenu.output.append("No reservations found under this Surname!\n");
+           }
 	   return searchSN;
 }
-    
+   //Filling the Trie with my data 
    public static void TrieFill()
    {
        for(Hotel x : hotelList)
        {
            for(Reservation y:x.reservations)
            {
-               tr.insert(y, x);
+               tr.insert(y, x); //fill trie with reservation=y and hotels = x
            }
        }
    }
     
+   //Filling avl tree with the data
     public static void createAVLTrees()
     {
         for(Hotel a : hotelList)
@@ -169,6 +199,7 @@ public class FileManager
         }
     }
     
+    //Avl creating a temporary hotel(AVLSearch) and calls avl search to find
     public static void SearchAVL(int searchID)
     {
         Hotel AVLSearch = new Hotel();
