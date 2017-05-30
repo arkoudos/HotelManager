@@ -150,7 +150,8 @@ public class FileManager
         {
             if(a.getId() == searchHotel.getId())
             {
-                CreateMenu.output.append("The hotel you searched is " + a.getName()+"\n");
+                //CreateMenu.output.append("The hotel you searched is " + a.getName()+"\n");
+                searchHotel.setName(a.getName());
                 break;// stop when i get the id
             }
         }
@@ -165,7 +166,7 @@ public class FileManager
 	   for(Hotel x: hotelList){
 		   for(Reservation y: x.reservations){
 			   if(y.getName().equals(searchSN.getName())){
-				   CreateMenu.output.append(searchSN.getName()+" is staying at: "+ x.getName() + " Checkin Date: " + new SimpleDateFormat("dd/MM/yyyy").format(y.getCheckinDate())+" Staying for:"+y.getStayDurationDays()+" Days\n");
+				  // CreateMenu.output.append(searchSN.getName()+" is staying at: "+ x.getName() + " Checkin Date: " + new SimpleDateFormat("dd/MM/yyyy").format(y.getCheckinDate())+" Staying for:"+y.getStayDurationDays()+" Days\n");
                                    check=1;
 				   break;
 			   }

@@ -120,7 +120,9 @@ public class CreateMenu// extends JFrame implements ActionListener
                 
                 else if(button == LinearSIDButton)
                 {
-                    FileManager.SearchByID(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE)));
+                    //FileManager.SearchByID(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE)));
+                    //searchHotel
+                    output.append("The hotel you searched is " + FileManager.SearchByID(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE))).getName() + "\n");
                 }
                 
                 else if(button == BinarySearchButton)
@@ -146,7 +148,8 @@ public class CreateMenu// extends JFrame implements ActionListener
                 
                 else if(button == LinearSSurButton)
                 {
-                    FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surname",JOptionPane.QUESTION_MESSAGE));
+                    //FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surname",JOptionPane.QUESTION_MESSAGE));
+                    //output.append("The hotel you searched is " + FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surname",JOptionPane.QUESTION_MESSAGE)).getName() + "\n");
                 }
                 
                 else if(button == TrieSearchButton)
