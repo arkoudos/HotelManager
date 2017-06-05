@@ -166,7 +166,7 @@ public class FileManager
 	   for(Hotel x: hotelList){
 		   for(Reservation y: x.reservations){
 			   if(y.getName().equals(searchSN.getName())){
-				  // CreateMenu.output.append(searchSN.getName()+" is staying at: "+ x.getName() + " Checkin Date: " + new SimpleDateFormat("dd/MM/yyyy").format(y.getCheckinDate())+" Staying for:"+y.getStayDurationDays()+" Days\n");
+				   CreateMenu.output.append(searchSN.getName()+" is staying at: "+ x.getName() + " Checkin Date: " + new SimpleDateFormat("dd/MM/yyyy").format(y.getCheckinDate())+" Staying for:"+y.getStayDurationDays()+" Days\n");
                                    check=1;
 				   break;
 			   }

@@ -43,7 +43,7 @@ public class Trie {
             	CreateMenu.output.append("\n" + "The Reservations with the name " + word + " is:\n");
                 for (int i = 0; i < p.index; i++)
                 	
-                	CreateMenu.output.append("Number of compares: "+counter+i + ": In The Hotel " + p.hotel[i].getName() + "\t Starts:" + p.hotel[i].getStars() + "\tDuration Days" + p.reservation[i].getStayDurationDays() + "\tDate:" + p.reservation[i].getCheckinDate() + "\n");
+                	CreateMenu.output.append("Number of compares: "+counter+i + ": In The Hotel " + p.hotel[i].getName() + "\t Stars:" + p.hotel[i].getStars() + "\tDuration Days" + p.reservation[i].getStayDurationDays() + "\tDate:" + p.reservation[i].getCheckinDate() + "\n");
  
             	
             	

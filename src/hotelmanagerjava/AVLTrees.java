@@ -3,13 +3,13 @@ package hotelmanagerjava;
 public class AVLTrees {
 	
     private static class Node {
-        Node left, right;
+        Node left, right; //basic Node contains left,right and parent node
         Node parent;
-        int value ;
-        int height = 0;
+        int value ; // the id of hotel
+        int height = 0; //height of the node
         Hotel temp=new Hotel();
         
-        //Node contains left,right and parent node,value will get the id of the hotel,and height is the height of the node.
+        
 
         public Node(Hotel data, Node parent) {
             this.value = data.getId();
@@ -37,7 +37,7 @@ public class AVLTrees {
 
     private Node root = null;
 
-    //calls the inster(node,hotel) to insert a new node in the avl tree
+    //calls the insert(node,hotel) to insert a new node in the avl tree
     
     public void insert(Hotel data) {
         insert(root, data);

@@ -17,8 +17,6 @@ public class CreateMenu// extends JFrame implements ActionListener
     private JButton LoadButton,SaveButton,AddButton,SearchButton,DisplayButton,ExitButton,LinearSIDButton,LinearSSurButton,BinarySearchButton,InterpolationSearchButton,AVLSearchButton,TrieSearchButton,IDSearchTimeButton,SurnameSearchTimeButton;
     public static JTextArea output = new JTextArea(7,50);
     JScrollPane ops = new JScrollPane(output);
-
-
     
     public void DisplayMenu()
     {
@@ -101,21 +99,25 @@ public class CreateMenu// extends JFrame implements ActionListener
                 {
                     FileManager.clear ();
                     FileManager.readFile();
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == SaveButton)
                 {
                     FileManager.FileSave();
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == AddButton)
                 {
                     Hotel.addHotel();
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == SearchButton)
                 {
                     SearchMenuID.setVisible(true);
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == LinearSIDButton)
@@ -123,48 +125,56 @@ public class CreateMenu// extends JFrame implements ActionListener
                     //FileManager.SearchByID(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE)));
                     //searchHotel
                     output.append("The hotel you searched is " + FileManager.SearchByID(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE))).getName() + "\n");
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == BinarySearchButton)
                 {
                     BinarySearch BS = new BinarySearch();
                     output.append("The hotel you searched is " + FileManager.hotelList.get(BS.binarySearch((Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE))))).getName() + "\n");
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == InterpolationSearchButton)
                 {
                     output.append("The hotel you searched is " + FileManager.hotelList.get(InterpolationSearch.interpolationSearch(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE)))).getName() + "\n");
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if (button == AVLSearchButton)
                 {
                     FileManager.SearchAVL(Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the ID:","Search Hotel by ID",JOptionPane.QUESTION_MESSAGE)));
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == DisplayButton)
                 {
                     SearchMenuSur.setVisible(true);
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == LinearSSurButton)
                 {
-                    //FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surname",JOptionPane.QUESTION_MESSAGE));
-                    //output.append("The hotel you searched is " + FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surname",JOptionPane.QUESTION_MESSAGE)).getName() + "\n");
+                    FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surname",JOptionPane.QUESTION_MESSAGE));
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == TrieSearchButton)
                 {
                     System.out.println(FileManager.tr.search(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surnmae",JOptionPane.QUESTION_MESSAGE)));
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == IDSearchTimeButton)
                 {
                     SearchTime.IDSearchTime();
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == SurnameSearchTimeButton)
                 {
                     SearchTime.SurnnameSearchTime();
+                    output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == ExitButton)
@@ -175,6 +185,7 @@ public class CreateMenu// extends JFrame implements ActionListener
             }
         };
         
+        //this is to make the buttons work
         LoadButton.addActionListener(action);
         SaveButton.addActionListener(action);
         AddButton.addActionListener(action);
@@ -190,6 +201,7 @@ public class CreateMenu// extends JFrame implements ActionListener
         SurnameSearchTimeButton.addActionListener(action);
         ExitButton.addActionListener(action);
         
+        //to correct the menu items position and GUI
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
@@ -238,10 +250,6 @@ public class CreateMenu// extends JFrame implements ActionListener
         c.ipadx = 500;
         MainPane.add(ops,c);
         
-        
-          //Making the Scroll bar auto-update
-        DefaultCaret caret = (DefaultCaret)output.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         
         MainMenu.setLayout(new GridLayout(1,1));
         MainMenu.setSize(600,600);

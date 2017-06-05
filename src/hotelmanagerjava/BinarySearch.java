@@ -3,7 +3,7 @@ package hotelmanagerjava;
 public class BinarySearch {
     public int binarySearch(int searchID) {
         int start = 0;
-        int end = FileManager.hotelList.size() - 1; //end of my list
+        int end = FileManager.hotelList.size() - 1; //end of my list (the -1 is for the first line that contains the number of hotels)
         while (start <= end) {
             int mid = (start + end) / 2; //my mid is the start of the list + the end divided by 2
             if (searchID == FileManager.hotelList.get(mid).getId()) {
