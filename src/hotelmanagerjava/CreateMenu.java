@@ -3,7 +3,6 @@ package hotelmanagerjava;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.text.DefaultCaret;
 
 public class CreateMenu// extends JFrame implements ActionListener
 {
@@ -155,12 +154,14 @@ public class CreateMenu// extends JFrame implements ActionListener
                 
                 else if(button == LinearSSurButton)
                 {
+                    FileManager.setPrintTest(1);
                     FileManager.SearchBySur(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surname",JOptionPane.QUESTION_MESSAGE));
                     output.setCaretPosition(output.getDocument().getLength());
                 }
                 
                 else if(button == TrieSearchButton)
                 {
+                    Trie.setPrintSearch(1);
                     System.out.println(FileManager.tr.search(JOptionPane.showInputDialog(null,"Enter the Surname:","Search Hotel by Surnmae",JOptionPane.QUESTION_MESSAGE)));
                     output.setCaretPosition(output.getDocument().getLength());
                 }
@@ -173,6 +174,8 @@ public class CreateMenu// extends JFrame implements ActionListener
                 
                 else if(button == SurnameSearchTimeButton)
                 {
+                    Trie.setPrintSearch(0);
+                    FileManager.setPrintTest(0);
                     SearchTime.SurnnameSearchTime();
                     output.setCaretPosition(output.getDocument().getLength());
                 }

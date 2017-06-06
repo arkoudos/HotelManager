@@ -22,7 +22,7 @@ public class Main
         
         if(searchFile.exists() && !searchFile.isDirectory())
         {
-            CreateMenu.output.append("File have been founded.\n Loading File...\n");
+            CreateMenu.output.append("File have been founded.\n");
            filePath = searchFile;
         }else{
            JFileChooser fs = new JFileChooser();

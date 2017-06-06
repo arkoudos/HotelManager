@@ -11,6 +11,11 @@ public class FileManager
     static int numberOfHotels;
     static AVLTrees avlTree = new AVLTrees(); // AVL tree creation
     static Trie tr = new Trie(); // Trie creation
+    static private int printTest = 1;
+
+    public static void setPrintTest(int printTest) {
+        FileManager.printTest = printTest;
+    }
     
     //read file fuction
     public static ArrayList<Hotel> readFile()
@@ -24,7 +29,7 @@ public class FileManager
                 CreateMenu.output.append("Data have been deleted.\n");
             }
             
-            
+            CreateMenu.output.append("Loading File...\n");
             String lineReader; // Read Line
             String[] lineR; // Store Readed Line
             FileReader readFile = new FileReader(Main.filePath); // File reader
@@ -35,7 +40,8 @@ public class FileManager
             lineR= lineReader.split(";");
             numberOfHotels = Integer.parseInt(lineR[0]); // save number of hotels listend
             CreateMenu.output.append("Reading the number of hotels that are listed.\n");
-            CreateMenu.output.append("Loading File...\n");
+            CreateMenu.output.append("Hotels are listed: " + numberOfHotels + "\n");
+            
             
             //Filling the ArrayList -> hotelList
             for(int i=0;i<numberOfHotels;i++)
@@ -166,7 +172,10 @@ public class FileManager
 	   for(Hotel x: hotelList){
 		   for(Reservation y: x.reservations){
 			   if(y.getName().equals(searchSN.getName())){
+                               if(printTest == 1)
+                               {
 				   CreateMenu.output.append(searchSN.getName()+" is staying at: "+ x.getName() + " Checkin Date: " + new SimpleDateFormat("dd/MM/yyyy").format(y.getCheckinDate())+" Staying for:"+y.getStayDurationDays()+" Days\n");
+                               }
                                    check=1;
 				   break;
 			   }
@@ -207,4 +216,7 @@ public class FileManager
         AVLSearch.setId(searchID);
         CreateMenu.output.append("The hotel you searched is " + avlTree.search(AVLSearch.getId()).getName() + "\n");
     }
+    
+    
+    
 }
